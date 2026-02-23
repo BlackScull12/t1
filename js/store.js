@@ -34,7 +34,7 @@ function loadStore() {
   items.forEach(item => {
     if (!item.show) return;
 
-    const converted = convertPrice(item.price);
+    const price = convertPrice(item.price);
 
     const card = document.createElement("div");
     card.className = "store-item";
@@ -42,7 +42,7 @@ function loadStore() {
       <img src="${item.image}">
       <h3>${item.name}</h3>
       <p>${item.description}</p>
-      <div class="price">${converted.symbol}${converted.value}</div>
+      <div class="price">${price.symbol}${price.value}</div>
       <button onclick="addToCart('${item.name}', ${item.price})">
         Add to Cart
       </button>
@@ -68,6 +68,7 @@ function convertPrice(usd) {
 // ================================
 function addToCart(name, usdPrice) {
   const item = cart.find(i => i.name === name);
+
   if (item) {
     item.qty++;
   } else {
@@ -75,32 +76,35 @@ function addToCart(name, usdPrice) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  openCart();
   renderCart();
+  openCart();
 }
 
 function renderCart() {
-  const container = document.getElementById("cartItems");
+  const itemsBox = document.getElementById("cartItems");
   const totalBox = document.getElementById("cartTotal");
 
-  container.innerHTML = "";
+  itemsBox.innerHTML = "";
   let totalUSD = 0;
 
   cart.forEach(item => {
     totalUSD += item.usdPrice * item.qty;
 
-    const div = document.createElement("div");
-    div.className = "cart-item";
-    div.innerHTML = `
+    const row = document.createElement("div");
+    row.className = "cart-item";
+    row.innerHTML = `
       <span>${item.name} × ${item.qty}</span>
-      <span>${convertPrice(item.usdPrice * item.qty).symbol}
-            ${convertPrice(item.usdPrice * item.qty).value}</span>
+      <span>
+        ${convertPrice(item.usdPrice * item.qty).symbol}
+        ${convertPrice(item.usdPrice * item.qty).value}
+      </span>
     `;
-    container.appendChild(div);
+
+    itemsBox.appendChild(row);
   });
 
-  const totalConverted = convertPrice(totalUSD);
-  totalBox.innerText = `Total: ${totalConverted.symbol}${totalConverted.value}`;
+  const total = convertPrice(totalUSD);
+  totalBox.innerText = `Total: ${total.symbol}${total.value}`;
 }
 
 // ================================
@@ -116,19 +120,9 @@ function closeCart() {
   document.getElementById("cartOverlay").classList.remove("active");
 }
 
-document.getElementById("cartOverlay").onclick = closeCart;
-
-// ================================
-// CHECKOUT NAVIGATION
-// ================================
-function goToCheckout() {
-  window.location.href = "checkout.html";
-}
-
-// ================================
-// INIT
-// ================================
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("cartOverlay").onclick = closeCart;
+
   const select = document.getElementById("currencySelect");
   if (select) {
     select.value = currentCurrency;
@@ -143,3 +137,10 @@ document.addEventListener("DOMContentLoaded", () => {
   loadStore();
   renderCart();
 });
+
+// ================================
+// CHECKOUT NAVIGATION
+// ================================
+function goToCheckout() {
+  window.location.href = "checkout.html";
+}
