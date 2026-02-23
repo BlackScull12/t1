@@ -212,3 +212,70 @@ button:hover {
   font-weight: bold;
   cursor: pointer;
 }
+/* ================================
+   MINI CART DRAWER
+================================ */
+#cartOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 998;
+}
+
+#cartOverlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#miniCart {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  padding: 20px;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.8);
+  transition: right 0.3s ease;
+  z-index: 999;
+}
+
+#miniCart.active {
+  right: 0;
+}
+
+#miniCart h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+#cartItems {
+  margin-top: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.cart-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+.cart-footer button {
+  width: 100%;
+  margin-top: 10px;
+}
