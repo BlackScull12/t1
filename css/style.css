@@ -3,7 +3,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   /* Use a dark forest image from Unsplash as a demo */
-  background: url('https://wallpaperaccess.com/full/96716.jpg') no-repeat center center fixed;
+  background: url('../images/a1.jpg') no-repeat center center fixed;
   background-size: cover;
   color: white;
   overflow-x: hidden;
