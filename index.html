@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Home - Dark Forest Store</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Home – Dark Forest Store</title>
+
+  <!-- Mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>Welcome to the Dark Forest Clothing Drop</h1>
-<p>Next Drop In: <span id="countdown">Loading...</span></p>
-<a href="store.html" style="color: yellow;">Enter Store</a>
 
-<div id="adminBubble">A</div>
+  <!-- Admin Bubble -->
+  <div id="adminBubble" title="Admin">A</div>
 
-<!-- Mini Cart Drawer -->
-<div id="cartOverlay"></div>
+  <!-- Home Content -->
+  <main style="text-align:center; padding:80px 20px;">
+    <h1>Dark Forest Clothing Drop</h1>
 
-<div id="miniCart">
-  <h2>Cart</h2>
-  <div id="cartItems"></div>
+    <p style="font-size:18px; margin-top:20px;">
+      Next Drop In:
+      <span id="countdown" style="font-weight:bold;">
+        Loading...
+      </span>
+    </p>
 
-  <div class="cart-footer">
-    <div id="cartTotal">Total: $0</div>
-    <button onclick="goToCheckout()">Checkout</button>
-  </div>
-</div>
-  
-<script src="js/main.js"></script>
+    <a href="store.html"
+       style="
+         display:inline-block;
+         margin-top:30px;
+         color:yellow;
+         font-size:18px;
+         text-decoration:none;
+       ">
+      Enter Store →
+    </a>
+  </main>
+
+  <!-- Fireflies + Countdown logic -->
+  <script src="js/main.js"></script>
+
 </body>
 </html>
