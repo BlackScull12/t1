@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Store</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Store</title>
+
+  <!-- Responsive scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>Clothing Store</h1>
-<div id="currencyBar">
-  <label for="currencySelect">Currency:</label>
-  <select id="currencySelect">
-    <option value="USD">USD ($)</option>
-    <option value="INR">INR (₹)</option>
-    <option value="EUR">EUR (€)</option>
-    <option value="GBP">GBP (£)</option>
-    <option value="JPY">JPY (¥)</option>
-    <option value="DNR">Dinar</option>
-  </select>
-</div>
-<div id="storeItems" class="store-grid">Loading...</div>
 
-<script src="js/store.js"></script>
+  <!-- Page title -->
+  <h1 style="text-align:center; margin-top:30px;">
+    Clothing Store
+  </h1>
+
+  <!-- Currency Switcher -->
+  <div id="currencyBar">
+    <label for="currencySelect">Currency:</label>
+    <select id="currencySelect">
+      <option value="USD">USD ($)</option>
+      <option value="INR">INR (₹)</option>
+      <option value="EUR">EUR (€)</option>
+      <option value="GBP">GBP (£)</option>
+      <option value="JPY">JPY (¥)</option>
+      <option value="DNR">Dinar</option>
+    </select>
+  </div>
+
+  <!-- Store Items Grid -->
+  <div id="storeItems" class="store-grid">
+    Loading...
+  </div>
+
+  <!-- Store logic -->
+  <script src="js/store.js"></script>
+
 </body>
 </html>
