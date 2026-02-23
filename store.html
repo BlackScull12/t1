@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Store – Dark Forest</title>
+  <meta name="description" content="Dark Forest Clothing Store">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <h1 style="text-align:center; margin-top:30px;">
-    Dark Forest Store
-  </h1>
+  <header class="store-header">
+    <h1>Dark Forest Store</h1>
+  </header>
 
   <!-- Currency Switcher -->
-  <div id="currencyBar">
+  <section id="currencyBar">
     <label for="currencySelect">Currency:</label>
     <select id="currencySelect">
       <option value="USD">USD ($)</option>
@@ -23,28 +24,33 @@
       <option value="JPY">JPY (¥)</option>
       <option value="DNR">Dinar</option>
     </select>
-  </div>
+  </section>
 
   <!-- Store Items -->
-  <div id="storeItems" class="store-grid">
-    Loading...
-  </div>
+  <main>
+    <div id="storeItems" class="store-grid">
+      Loading...
+    </div>
+  </main>
 
   <!-- MINI CART (STORE ONLY) -->
-  <div id="cartOverlay"></div>
+  <div id="cartOverlay" aria-hidden="true"></div>
 
-  <div id="miniCart">
+  <aside id="miniCart" aria-label="Shopping Cart">
     <h2>Cart</h2>
+
     <div id="cartItems"></div>
 
     <div class="cart-footer">
       <div id="cartTotal">Total: $0</div>
-      <button onclick="goToCheckout()">Checkout</button>
+      <button type="button" onclick="goToCheckout()">
+        Checkout
+      </button>
     </div>
-  </div>
+  </aside>
 
   <!-- Store Logic -->
-  <script src="js/store.js"></script>
+  <script src="js/store.js" defer></script>
 
 </body>
 </html>
