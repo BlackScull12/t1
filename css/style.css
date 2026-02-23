@@ -188,3 +188,27 @@ button:hover {
   margin: 10px 0;
   font-size: 16px;
 }
+
+/* ================================
+   CURRENCY SWITCHER
+================================ */
+#currencyBar {
+  max-width: 1200px;
+  margin: 30px auto 0;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#currencyBar label {
+  font-weight: bold;
+}
+
+#currencySelect {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
