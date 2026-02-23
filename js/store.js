@@ -11,9 +11,10 @@ const currencyRates = {
 };
 
 let currentCurrency = localStorage.getItem("currency") || "USD";
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
 // ================================
-// LOAD STORE
+// STORE LOAD
 // ================================
 function loadStore() {
   const container = document.getElementById("storeItems");
@@ -24,7 +25,7 @@ function loadStore() {
   const now = new Date();
 
   if (now < dropDate) {
-    container.innerHTML = `<h2 style="text-align:center;">🌑 Store opens soon</h2>`;
+    container.innerHTML = "<h2 style='text-align:center;'>🌑 Store opens soon</h2>";
     return;
   }
 
@@ -41,10 +42,8 @@ function loadStore() {
       <img src="${item.image}">
       <h3>${item.name}</h3>
       <p>${item.description}</p>
-      <div class="price">
-        ${converted.symbol}${converted.value}
-      </div>
-      <button onclick="addToCart('${item.name}', ${converted.value})">
+      <div class="price">${converted.symbol}${converted.value}</div>
+      <button onclick="addToCart('${item.name}', ${item.price})">
         Add to Cart
       </button>
     `;
@@ -56,36 +55,91 @@ function loadStore() {
 // ================================
 // PRICE CONVERSION
 // ================================
-function convertPrice(usdPrice) {
-  const currency = currencyRates[currentCurrency];
+function convertPrice(usd) {
+  const c = currencyRates[currentCurrency];
   return {
-    symbol: currency.symbol,
-    value: (usdPrice * currency.rate).toFixed(2)
+    symbol: c.symbol,
+    value: (usd * c.rate).toFixed(2)
   };
 }
 
 // ================================
-// CART (PLACEHOLDER)
+// CART LOGIC
 // ================================
-function addToCart(name, price) {
-  alert(`${name} added for ${price} ${currentCurrency}`);
+function addToCart(name, usdPrice) {
+  const item = cart.find(i => i.name === name);
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ name, usdPrice, qty: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  openCart();
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById("cartItems");
+  const totalBox = document.getElementById("cartTotal");
+
+  container.innerHTML = "";
+  let totalUSD = 0;
+
+  cart.forEach(item => {
+    totalUSD += item.usdPrice * item.qty;
+
+    const div = document.createElement("div");
+    div.className = "cart-item";
+    div.innerHTML = `
+      <span>${item.name} × ${item.qty}</span>
+      <span>${convertPrice(item.usdPrice * item.qty).symbol}
+            ${convertPrice(item.usdPrice * item.qty).value}</span>
+    `;
+    container.appendChild(div);
+  });
+
+  const totalConverted = convertPrice(totalUSD);
+  totalBox.innerText = `Total: ${totalConverted.symbol}${totalConverted.value}`;
 }
 
 // ================================
-// CURRENCY SWITCH HANDLER
+// CART UI
+// ================================
+function openCart() {
+  document.getElementById("miniCart").classList.add("active");
+  document.getElementById("cartOverlay").classList.add("active");
+}
+
+function closeCart() {
+  document.getElementById("miniCart").classList.remove("active");
+  document.getElementById("cartOverlay").classList.remove("active");
+}
+
+document.getElementById("cartOverlay").onclick = closeCart;
+
+// ================================
+// CHECKOUT NAVIGATION
+// ================================
+function goToCheckout() {
+  window.location.href = "checkout.html";
+}
+
+// ================================
+// INIT
 // ================================
 document.addEventListener("DOMContentLoaded", () => {
   const select = document.getElementById("currencySelect");
-
   if (select) {
     select.value = currentCurrency;
-
-    select.addEventListener("change", () => {
+    select.onchange = () => {
       currentCurrency = select.value;
       localStorage.setItem("currency", currentCurrency);
       loadStore();
-    });
+      renderCart();
+    };
   }
 
   loadStore();
+  renderCart();
 });
