@@ -1,12 +1,15 @@
+/* Global body styling with working background */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: url('forest-dark.jpg') no-repeat center center fixed;
+  /* Use a dark forest image from Unsplash as a demo */
+  background: url('https://wallpaperaccess.com/full/96716.jpg') no-repeat center center fixed;
   background-size: cover;
   color: white;
   overflow-x: hidden;
 }
 
+/* Firefly animation */
 .firefly {
   position: absolute;
   width: 5px;
@@ -18,11 +21,14 @@ body {
 }
 
 @keyframes fly {
-  0% {transform: translate(0,0);}
-  50% {transform: translate(100px, 200px);}
-  100% {transform: translate(0,0);}
+  0% { transform: translate(0,0); }
+  25% { transform: translate(50px, -30px); }
+  50% { transform: translate(100px, 200px); }
+  75% { transform: translate(-40px, 100px); }
+  100% { transform: translate(0,0); }
 }
 
+/* Buttons styling */
 button {
   cursor: pointer;
   margin-left: 5px;
@@ -31,6 +37,7 @@ button {
   border: none;
 }
 
+/* Admin bubble button */
 #adminBubble {
   position: fixed;
   top: 20px;
@@ -46,4 +53,11 @@ button {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(255,0,0,0.7);
+  transition: transform 0.2s ease;
+}
+
+#adminBubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255,0,0,0.9);
 }
