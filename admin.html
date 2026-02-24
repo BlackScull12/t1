@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Admin Dashboard</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Admin Dashboard – Dark Forest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>Admin Dashboard</h1>
 
-<h3>Upload New Item</h3>
-<input type="text" id="name" placeholder="Name">
-<input type="text" id="description" placeholder="Description">
-<input type="number" id="price" placeholder="Price USD">
-<input type="text" id="image" placeholder="Image URL">
-<button onclick="addItem()">Add Item</button>
+  <h1 style="text-align:center; margin-top:30px;">
+    Admin Dashboard
+  </h1>
 
-<h3>Manage Items</h3>
-<div id="itemsList"></div>
+  <!-- ================================
+       ADD NEW ITEM
+  ================================= -->
+  <section style="max-width:600px; margin:30px auto; text-align:center;">
+    <h3>Upload New Item</h3>
 
-<h3>Set Drop Date</h3>
-<button onclick="setDropDate()">Set Drop Date</button>
+    <input type="text" id="name" placeholder="Item Name" />
+    <br><br>
 
-<script src="js/admin.js"></script>
+    <input type="text" id="description" placeholder="Item Description" />
+    <br><br>
+
+    <input type="number" id="price" placeholder="Price (USD)" step="0.01" />
+    <br><br>
+
+    <input type="text" id="image" placeholder="Image URL" />
+    <br><br>
+
+    <button onclick="addItem()">Add Item</button>
+  </section>
+
+  <!-- ================================
+       MANAGE ITEMS
+  ================================= -->
+  <section style="max-width:800px; margin:40px auto;">
+    <h3>Manage Items</h3>
+    <div id="itemsList"></div>
+  </section>
+
+  <!-- ================================
+       DROP DATE
+  ================================= -->
+  <section style="text-align:center; margin:40px 0;">
+    <h3>Set Drop Date</h3>
+    <button onclick="setDropDate()">Set Drop Date</button>
+  </section>
+
+  <!-- Admin Logic -->
+  <script src="js/admin.js"></script>
+
 </body>
 </html>
